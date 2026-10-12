@@ -1,0 +1,687 @@
+
+<!DOCTYPE html>
+<html manifest="700.manifest">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PS4 5.0 - 13.52 FW GoldHEN by Ahmad Sirbel (ADAM Center)</title>
+
+<link rel="stylesheet" href="../style.css">
+
+<style>
+/* ========================================
+   GOLDHEN PREMIUM ANIMATED LOADING
+======================================== */
+
+.goldhen-loading {
+    width: 100%;
+    margin: 35px auto 0;
+    padding: 20px 15px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    color: #fff;
+    box-sizing: border-box;
+}
+
+.goldhen-spinner {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 25px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.goldhen-spinner::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border: 4px solid rgba(212, 175, 101, 0.15);
+    border-top: 4px solid #f4d58d;
+    border-right: 4px solid #c49a45;
+    border-radius: 50%;
+    animation: goldhen-spin 1.4s linear infinite;
+    box-shadow: 0 0 18px rgba(212, 175, 101, 0.18);
+}
+
+.goldhen-spinner::after {
+    content: "";
+    position: absolute;
+    inset: 11px;
+    border: 3px solid transparent;
+    border-bottom-color: #fff0c4;
+    border-left-color: #b78b3e;
+    border-radius: 50%;
+    animation: goldhen-spin-reverse 2s linear infinite;
+}
+
+.spinner-center {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: radial-gradient(circle, #49391b, #151515 75%);
+    color: #ffe5a3;
+    font-size: 23px;
+    font-weight: bold;
+    text-shadow: 0 0 12px rgba(255, 214, 125, 0.9);
+    animation: goldhen-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes goldhen-spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes goldhen-spin-reverse {
+    to { transform: rotate(-360deg); }
+}
+
+@keyframes goldhen-pulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 5px rgba(212, 175, 101, 0.15);
+    }
+    50% {
+        transform: scale(1.08);
+        box-shadow: 0 0 20px rgba(212, 175, 101, 0.35);
+    }
+}
+
+.loading-message {
+    margin: 0 auto;
+    color: #ffffff;
+    font-size: 27px;
+    font-weight: 700;
+    line-height: 1.5;
+    text-align: center;
+    text-shadow: 0 0 10px rgba(212, 175, 101, 0.35);
+}
+
+.loading-dots {
+    display: inline-block;
+    width: 30px;
+    text-align: left;
+    color: #e6c477;
+}
+
+.loading-dots span {
+    display: inline-block;
+    animation: dot-blink 1.4s infinite both;
+}
+
+.loading-dots span:nth-child(2) {
+    animation-delay: .2s;
+}
+
+.loading-dots span:nth-child(3) {
+    animation-delay: .4s;
+}
+
+@keyframes dot-blink {
+    0%, 80%, 100% {
+        opacity: .2;
+        transform: translateY(0);
+    }
+    40% {
+        opacity: 1;
+        transform: translateY(-3px);
+    }
+}
+
+.loading-subtitle {
+    margin-top: 10px;
+    color: #d4af65;
+    font-size: 14px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    animation: subtitle-glow 2s ease-in-out infinite;
+}
+
+@keyframes subtitle-glow {
+    0%, 100% { opacity: .55; }
+    50% { opacity: 1; }
+}
+
+.loading-track {
+    width: 260px;
+    max-width: 85%;
+    height: 5px;
+    margin: 25px auto 12px;
+    overflow: hidden;
+    border-radius: 10px;
+    background: #303030;
+    box-shadow: inset 0 0 5px #000;
+}
+
+.loading-track-fill {
+    width: 40%;
+    height: 100%;
+    border-radius: 10px;
+    background: linear-gradient(90deg, #8c6728, #ffe7a3, #b58a3b);
+    box-shadow: 0 0 12px rgba(212, 175, 101, .65);
+    animation: loading-progress 2s ease-in-out infinite;
+}
+
+@keyframes loading-progress {
+    0% { transform: translateX(-110%); }
+    100% { transform: translateX(360%); }
+}
+
+.loading-caption {
+    color: #888;
+    font-size: 10px;
+    letter-spacing: 3px;
+}
+
+/* رسائل الكاش */
+#msgs.cache-message {
+    margin: 15px auto;
+    padding: 0 12px;
+    color: #d4af65;
+    font-size: 15px;
+    line-height: 1.7;
+    text-align: center;
+    overflow-wrap: anywhere;
+}
+
+/* ========================================
+   PREMIUM DESIGN CREDITS
+======================================== */
+
+.design-credits {
+    width: 100%;
+    margin: 55px 0 35px;
+    padding: 0 25px;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    color: #fff;
+    direction: ltr;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.design-credits * {
+    box-sizing: border-box;
+}
+
+.credits-header {
+    width: 100%;
+    max-width: 480px;
+    text-align: right;
+    margin: 0 0 18px;
+}
+
+.credits-header .eyebrow {
+    color: #d4af65;
+    font-size: 11px;
+    letter-spacing: 4px;
+    margin-bottom: 8px;
+}
+
+.credits-header h2 {
+    font-size: 30px;
+    font-weight: 800;
+    color: #fff;
+    margin: 0;
+    letter-spacing: 1px;
+}
+
+.credits-header .gold-line {
+    width: 60px;
+    height: 3px;
+    margin: 13px 0 0 auto;
+    background: linear-gradient(90deg, #a77a30, #ffe4a1);
+    border-radius: 10px;
+}
+
+.credit-card {
+    width: 100%;
+    max-width: 480px;
+    margin: 0 0 18px auto;
+    padding: 15px;
+    background: linear-gradient(135deg, #191919, #252525);
+    border: 1px solid #393939;
+    border-radius: 13px;
+    box-shadow: 0 8px 22px rgba(0,0,0,.22);
+    transition: transform .3s ease, border-color .3s ease;
+}
+
+.credit-card:hover {
+    transform: translateY(-3px);
+    border-color: #b99552;
+}
+
+.credit-person {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    text-align: right;
+    margin-bottom: 15px;
+}
+
+.person-icon {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 11px;
+    background: linear-gradient(135deg, #42351e, #171717);
+    border: 1px solid #8f713d;
+    color: #e8c982;
+    font-size: 19px;
+}
+
+.person-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.person-info h3 {
+    font-size: 19px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 5px;
+}
+
+.person-info p {
+    font-size: 10px;
+    color: #d4af65;
+    letter-spacing: 1px;
+    margin: 0;
+}
+
+.social-links {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 7px;
+}
+
+.social-link {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 10px 5px;
+    border-radius: 10px;
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+    background: #303030;
+    border: 1px solid rgba(255,255,255,.10);
+    transition: transform .25s ease, background .25s ease;
+}
+
+.social-link:hover {
+    transform: translateY(-3px);
+    color: #fff;
+}
+
+.social-link .social-icon {
+    width: 29px;
+    height: 29px;
+    min-width: 29px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    color: #fff;
+}
+
+.social-icon svg {
+    width: 17px;
+    height: 17px;
+    fill: currentColor;
+}
+
+.facebook .social-icon {
+    background: #1877F2;
+}
+
+.instagram .social-icon {
+    background: linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
+}
+
+.whatsapp .social-icon {
+    background: #25D366;
+}
+
+.facebook:hover { background: #18365a; }
+.instagram:hover { background: #49263e; }
+.whatsapp:hover { background: #174a32; }
+
+.social-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    min-width: 0;
+    width: 100%;
+}
+
+.social-text strong {
+    font-size: 9px;
+    font-weight: 500;
+    color: #bcbcbc;
+}
+
+.social-text span {
+    font-size: 11px;
+    font-weight: 700;
+    color: #fff;
+    overflow-wrap: anywhere;
+}
+
+.credits-footer {
+    width: 100%;
+    max-width: 480px;
+    text-align: center;
+    color: #929292;
+    font-size: 16px;
+    line-height: 1.8;
+    margin-top: 12px;
+}
+
+.credits-footer span {
+    color: #d4af65;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+/* Responsive */
+@media (max-width: 520px) {
+    .goldhen-spinner {
+        width: 85px;
+        height: 85px;
+    }
+
+    .loading-message {
+        font-size: 21px;
+    }
+
+    .loading-subtitle {
+        font-size: 11px;
+        letter-spacing: 3px;
+    }
+
+    .design-credits {
+        padding: 0 12px;
+        margin-top: 35px;
+    }
+
+    .credit-card {
+        max-width: 100%;
+        padding: 12px;
+    }
+
+    .credits-header h2 {
+        font-size: 26px;
+    }
+
+    .person-info h3 {
+        font-size: 17px;
+    }
+
+    .social-links {
+        gap: 5px;
+    }
+
+    .social-link {
+        padding: 9px 3px;
+    }
+
+    .social-text strong {
+        font-size: 8px;
+    }
+
+    .social-text span {
+        font-size: 10px;
+    }
+
+    .credits-footer {
+        font-size: 14px;
+    }
+
+    .credits-footer span {
+        font-size: 16px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .goldhen-spinner::before,
+    .goldhen-spinner::after,
+    .spinner-center,
+    .loading-dots span,
+    .loading-subtitle,
+    .loading-track-fill {
+        animation-duration: 5s;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<script>
+history.replaceState(null, null, 'index.html');
+
+var histlength = history.length;
+history.go(-histlength);
+
+/* Offline Cache status */
+function setCacheMessage(message) {
+    var msg = document.getElementById("msgs");
+    if (msg) {
+        msg.textContent = message;
+    }
+}
+
+function DLProgress(e) {
+    if (e.lengthComputable && e.total > 0) {
+        var Percent = Math.round(e.loaded / e.total * 100);
+        setCacheMessage("Installing Offline Cache: " + Percent + "%");
+    } else {
+        setCacheMessage("Installing Offline Cache...");
+    }
+}
+
+function DisplayCacheProgress() {
+    setCacheMessage("Cache Installed Successfully ✔");
+
+    setTimeout(function() {
+        setCacheMessage("Now Close And Re-Open Your Browser ...");
+    }, 1500);
+}
+
+/* Support older browsers that expose applicationCache */
+if (window.applicationCache) {
+    window.applicationCache.addEventListener("progress", DLProgress, false);
+
+    window.applicationCache.oncached = function() {
+        DisplayCacheProgress();
+    };
+
+    window.applicationCache.onupdateready = function() {
+        DisplayCacheProgress();
+    };
+
+    window.applicationCache.onerror = function() {
+        setCacheMessage(
+            "Error Installing Cache! - Clear and Re-Open Your Browser ..."
+        );
+    };
+}
+</script>
+
+<h1>
+    PS4 5.0 - 13.52 FW GoldHEN by Ahmad Sirbel (ADAM Center)
+</h1>
+
+<hr>
+
+<!-- GOLDHEN ANIMATED LOADING -->
+<div class="goldhen-loading">
+
+    <div class="goldhen-spinner">
+        <div class="spinner-center">G</div>
+    </div>
+
+    <h1 id="loading-title" class="loading-message">
+        Loading GoldHEN v2.4b18.12<span class="loading-dots"><span>.</span><span>.</span><span>.</span></span>
+    </h1>
+
+    <div class="loading-subtitle">Please Wait</div>
+
+    <div class="loading-track">
+        <div class="loading-track-fill"></div>
+    </div>
+
+    <div class="loading-caption">INITIALIZING GOLDHEN</div>
+
+    <!-- Cache status is updated by the original cache handlers -->
+    <div id="msgs" class="cache-message" aria-live="polite"></div>
+
+</div>
+
+<!-- DESIGN CREDITS -->
+<div class="design-credits">
+
+    <div class="credits-header">
+        <div class="eyebrow">CREATIVE DESIGN</div>
+        <h2>Designed By</h2>
+        <div class="gold-line"></div>
+    </div>
+
+    <!-- ADAM CENTER -->
+    <div class="credit-card">
+        <div class="credit-person">
+            <div class="person-icon">✦</div>
+            <div class="person-info">
+                <h3>ADAM Center</h3>
+                <p>OFFICIAL SOCIAL MEDIA</p>
+            </div>
+        </div>
+
+        <div class="social-links">
+            <a class="social-link facebook"
+               href="https://www.facebook.com/adamcenterjo/"
+               target="_blank" rel="noopener noreferrer">
+                <div class="social-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M13.5 21v-8.2h2.8l.4-3.2h-3.2V7.5c0-.9.3-1.5 1.6-1.5h1.7V3.1c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.3H7.3v3.2h2.8V21z"/>
+                    </svg>
+                </div>
+                <div class="social-text">
+                    <strong>Facebook</strong>
+                    <span>ADAM Center</span>
+                </div>
+            </a>
+
+            <a class="social-link instagram"
+               href="https://www.instagram.com/adam_centerr/"
+               target="_blank" rel="noopener noreferrer">
+                <div class="social-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2.2A2.8 2.8 0 0 0 4.2 7v10A2.8 2.8 0 0 0 7 19.8h10a2.8 2.8 0 0 0 2.8-2.8V7A2.8 2.8 0 0 0 17 4.2zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2.2a2.8 2.8 0 1 0 0 5.6 2.8 2.8 0 0 0 0-5.6zm5.3-3.8a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4z"/>
+                    </svg>
+                </div>
+                <div class="social-text">
+                    <strong>Instagram</strong>
+                    <span>ADAM Center</span>
+                </div>
+            </a>
+
+            <a class="social-link whatsapp"
+               href="https://wa.me/962789506764"
+               target="_blank" rel="noopener noreferrer">
+                <div class="social-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0C5.6 0 .3 5.3.3 11.8c0 2.1.6 4.2 1.6 6L0 24l6.4-1.7a11.9 11.9 0 0 0 5.7 1.4h.1c6.5 0 11.8-5.3 11.8-11.8 0-3.2-1.2-6.1-3.5-8.4zM12.1 21.7c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-3.8 1 1-3.7-.3-.4a9.8 9.8 0 0 1-1.5-5.2 10.1 10.1 0 0 1 20.2 0c0 5.5-4.6 9.9-10.1 9.9zm5.5-7.5c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.4.3-.6.1-.2 0-.5 0-.6-.1-.2-.7-1.7-1-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.6s1.1 3 1.3 3.2c.2.2 2.2 3.4 5.4 4.7.8.3 1.4.5 1.9.6.8.3 1.5.2 2 .1.7-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.2-.3-.3-.6-.4z"/>
+                    </svg>
+                </div>
+                <div class="social-text">
+                    <strong>WhatsApp</strong>
+                    <span>Contact Us</span>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- AHMAD SIRBEL -->
+    <div class="credit-card">
+        <div class="credit-person">
+            <div class="person-icon">✦</div>
+            <div class="person-info">
+                <h3>Ahmad Sirbel</h3>
+                <p>WEB DESIGNER &amp; DEVELOPER</p>
+            </div>
+        </div>
+
+        <div class="social-links">
+            <a class="social-link facebook"
+               href="https://www.facebook.com/ahmad.sirbel/"
+               target="_blank" rel="noopener noreferrer">
+                <div class="social-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M13.5 21v-8.2h2.8l.4-3.2h-3.2V7.5c0-.9.3-1.5 1.6-1.5h1.7V3.1c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.3H7.3v3.2h2.8V21z"/>
+                    </svg>
+                </div>
+                <div class="social-text">
+                    <strong>Facebook</strong>
+                    <span>Ahmad Sirbel</span>
+                </div>
+            </a>
+
+            <a class="social-link instagram"
+               href="https://www.instagram.com/ahmadsirbel/"
+               target="_blank" rel="noopener noreferrer">
+                <div class="social-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2.2A2.8 2.8 0 0 0 4.2 7v10A2.8 2.8 0 0 0 7 19.8h10a2.8 2.8 0 0 0 2.8-2.8V7A2.8 2.8 0 0 0 17 4.2zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2.2a2.8 2.8 0 1 0 0 5.6 2.8 2.8 0 0 0 0-5.6zm5.3-3.8a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4z"/>
+                    </svg>
+                </div>
+                <div class="social-text">
+                    <strong>Instagram</strong>
+                    <span>Ahmad Sirbel</span>
+                </div>
+            </a>
+
+            <a class="social-link whatsapp"
+               href="https://wa.me/962789506764"
+               target="_blank" rel="noopener noreferrer">
+                <div class="social-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0C5.6 0 .3 5.3.3 11.8c0 2.1.6 4.2 1.6 6L0 24l6.4-1.7a11.9 11.9 0 0 0 5.7 1.4h.1c6.5 0 11.8-5.3 11.8-11.8 0-3.2-1.2-6.1-3.5-8.4zM12.1 21.7c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-3.8 1 1-3.7-.3-.4a9.8 9.8 0 0 1-1.5-5.2 10.1 10.1 0 0 1 20.2 0c0 5.5-4.6 9.9-10.1 9.9zm5.5-7.5c-.3-.2-1.8-.9-2.1-1-.3-.1-.5.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.4.3-.6.1-.2 0-.5 0-.6-.1-.2-.7-1.7-1-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.6s1.1 3 1.3 3.2c.2.2 2.2 3.4 5.4 4.7.8.3 1.4.5 1.9.6.8.3 1.5.2 2 .1.7-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.2-.3-.3-.6-.4z"/>
+                    </svg>
+                </div>
+                <div class="social-text">
+                    <strong>WhatsApp</strong>
+                    <span>Contact Me</span>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="credits-footer">
+        Crafted with passion by
+        <span>Ahmad Sirbel</span>
+        <br>
+        © ADAM Center — All Rights Reserved
+    </div>
+
+</div>
+
+</body>
+</html>
+```
